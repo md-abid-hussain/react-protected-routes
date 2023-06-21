@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import AuthContext from './context/AuthProvider'
+import AuthContext from '../context/AuthProvider'
 
-import axios from './api/axios'
+import axios from '../api/axios'
 
 const LOGIN_URL = '/auth'
 
