@@ -1,21 +1,26 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import AuthContext from '../context/AuthProvider'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
+
 
 import axios from '../api/axios'
 
 const LOGIN_URL = '/auth'
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext)
+    const { setAuth } = useAuth();
     const [user, setUser] = useState('')
     const [pwd, setPwd] = useState('')
     const [errMsg, setErrMsg] = useState('')
-    const [success, setSuccess] = useState(false)
 
     const userRef = useRef()
     const errRef = useRef()
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
 
     useEffect(() => {
         userRef.current.focus()
@@ -44,7 +49,7 @@ const Login = () => {
             setUser('')
             setPwd('')
             setErrMsg('')
-            setSuccess(true)
+            navigate(from, { replace: true })
         } catch (err) {
             if (!err?.response)
                 setErrMsg('No response from server')
@@ -57,50 +62,37 @@ const Login = () => {
     }
 
     return (
-        <>{
-            success ?
-                (
-                    <section className='success'>
-                        <h1>Login Successful</h1>
-                        <br />
-                        <p><a href='#'>Go to home</a></p>
-                    </section>
-                )
-                :
-                (
-                    <section>
-                        <p ref={errRef} className={errMsg ? "errMsg" : "offScreen"} aria-live='assertive'>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            {errMsg}
-                        </p>
-                        <h1>Sign In</h1>
-                        <form onSubmit={handleSubmit}>
-                            <label htmlFor="username">Username</label>
-                            <input
-                                type="text"
-                                id='username'
-                                value={user}
-                                ref={userRef}
-                                autoComplete='off'
-                                onChange={(e) => setUser(e.target.value)}
-                                required
-                            />
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                value={pwd}
-                                onChange={(e) => setPwd(e.target.value)}
-                                required
-                            />
-                            <button disabled={user && pwd ? false : true}>Login</button>
-                        </form>
-                        <p>Need an account ? </p>
-                        <a href='#'>Sign up</a>
-                    </section>
-                )
-        }
-        </>
+        <section>
+            <p ref={errRef} className={errMsg ? "errMsg" : "offScreen"} aria-live='assertive'>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                {errMsg}
+            </p>
+            <h1>Sign In</h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="username">Username</label>
+                <input
+                    type="text"
+                    id='username'
+                    value={user}
+                    ref={userRef}
+                    autoComplete='off'
+                    onChange={(e) => setUser(e.target.value)}
+                    required
+                />
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    value={pwd}
+                    onChange={(e) => setPwd(e.target.value)}
+                    required
+                />
+                <button disabled={user && pwd ? false : true}>Login</button>
+            </form>
+            <p>Need an account ? </p>
+            <Link to='/register'>Sign up</Link>
+        </section>
+
     )
 }
 
