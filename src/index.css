@@ -6,6 +6,22 @@
   box-sizing: border-box;
 }
 
+li {
+  list-style-type: none;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+h2 {
+  margin-top: 1em;
+}
+
 body {
   font-family: "Barlow", sans-serif;
   font-size: 1.2rem;
@@ -13,18 +29,19 @@ body {
 
 .App {
   min-height: 100vh;
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #9ac5f4;
 }
 
 section {
-  padding: 1rem;
-  max-width: 370px;
+  padding: 1.5rem;
+  width: 350px;
   background-color: #243a73;
   color: white;
   border-radius: 0.5rem;
-  min-height: 400px;
+  min-height: 300px;
 }
 
 .success {
@@ -35,10 +52,6 @@ section {
 
 .hide {
   display: none;
-}
-
-h1 {
-  font-size: 1.5rem;
 }
 
 form {
@@ -56,7 +69,7 @@ input,
 button {
   padding: 0.35rem;
   border-radius: 0.25rem;
-  min-width: calc(370px - 2.25rem);
+  min-width: calc(330px - 2.25rem);
   font-family: inherit;
   font-size: 1.1rem;
 }
@@ -76,10 +89,6 @@ button {
   display: inline-block;
   color: rgb(255, 0, 0);
   padding-left: 0.5rem;
-}
-
-a {
-  color: white;
 }
 
 .instructions {
@@ -108,4 +117,23 @@ button {
 
 .errMsg > svg {
   padding-right: 0.5rem;
+}
+
+.homelinks {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.back {
+  margin-top: 1.5em;
 }
