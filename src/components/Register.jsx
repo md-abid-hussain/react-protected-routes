@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 import axios from '../api/axios'
 
 // RegEx for validation
@@ -94,7 +95,7 @@ const Register = () => {
                     (
                         <section className='success'>
                             <h1>Registration Successful</h1>
-                            <a href="#">Sign In</a>
+                            <Link to='/login'>Sign In</Link>
                         </section>
                     )
                     :
@@ -184,7 +185,7 @@ const Register = () => {
                                 </p>
                                 <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                             </form>
-                            <p>Already register ? <span className="line"> <a href="#"> Sign In </a> </span>{/* Router link instead of  */}
+                            <p>Already register ? <span className="line"> <Link to='/login'> Sign In </Link> </span>{/* Router link instead of  */}
                             </p>
                         </section>
                     )
